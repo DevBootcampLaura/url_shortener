@@ -1,23 +1,10 @@
-<div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+<form action="/urls" method="post">
+  Long URL: <input type="text" name="long_url">
+  <input type="submit" value="Generate short URL">
+</form>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
-</div>
+URL List:<br>
+<% Url.all.each do |record|%>
+  <a href="<%= record.long_url %>"><%= record.long_url %></a> -
+  <a href="http://127.0.0.1:9393/<%= record.short_url %>">http://127.0.0.1:9393/<%= record.short_url %></a><br>
+  <% end %>
